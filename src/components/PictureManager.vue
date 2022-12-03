@@ -10,7 +10,7 @@
     </el-table>
     <span class="demonstration">显示总数</span>
     <el-pagination
-      @current-change="getSourcePathList" :current-page.sync="sourcePicturePn" :page-size="sourcePicturePs"
+      @current-change="getSourcePathList"  :page-size="sourcePicturePs"
       layout="total, prev, pager, next" :total="sourcePictureTotal"
       flex="1"
       display="flex"
@@ -24,12 +24,11 @@
 </template>
 
 <script>
-// import axios from 'axios'
-import {getPictureList, getSourcePathRequest} from '../util/PictureRequest.js'
+import {getPictureList, getSourcePathRequest} from '@/utils/PictureRequest.js'
 
 export default {
 
-  name: 'test',
+  name: 'PictureManager',
   data () {
     return {
       title: '图片预览',
@@ -52,6 +51,21 @@ export default {
         that.pictures = data
       })
     },
+
+    init() {
+      console.log("1234")
+      this.getPictures()
+    },
+
+    getPictures() {
+      this.$request({
+        method: 'get',
+        url: '/images',
+      }).then(res => {
+        console.log(res)
+        this.sourcePathDict = res.data['images']
+      })
+    },
     reset: function () {
       // 重置查询页数
       this.pn = 1
@@ -66,9 +80,13 @@ export default {
       })
     }
   },
+  mounted() {
+    this.init()
+    // this.getSourcePathList()
+  },
   created () {
       // 页面初始化时就获取源文件
-      this.getSourcePathList()
+      // this.getSourcePathList()
     }
 }
 
