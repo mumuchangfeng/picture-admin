@@ -1,4 +1,4 @@
-# picture-admin-yexy
+# picture-admin
 
 ## Project setup
 ```
