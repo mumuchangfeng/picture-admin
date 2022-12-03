@@ -4,7 +4,11 @@
     <div class="source-path-list">
       <el-table :data="sourcePathDict" style="width: 100%">
       <el-table-column prop="id" label="id"></el-table-column>
-      <el-table-column prop="source_picture_path" label="路径" width="500"></el-table-column>
+      <el-table-column label="路径" width="500">
+        <template v-slot="scope">
+            <a href="https://www.baidu.com">{{ scope.row.source_picture_path }}</a>
+        </template>
+      </el-table-column>
       <el-table-column prop="build_time" label="创建时间"></el-table-column>
       <el-table-column prop="extend_info" label="备注"></el-table-column>
     </el-table>
@@ -25,6 +29,7 @@
 
 <script>
 import {getPictureList, getSourcePathRequest} from '@/utils/PictureRequest.js'
+// import axios from 'axios'
 
 export default {
 
@@ -58,6 +63,14 @@ export default {
     },
 
     getPictures() {
+
+      // axios({
+      //   'method': 'get',
+      //   'url': '/images',
+      // }).then( (response) => {
+      //     // data = response.data.data
+      //     console.log(response)
+      // })
       this.$request({
         method: 'get',
         url: '/images',
@@ -96,10 +109,5 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
-}
-/deep/.btn-next,
-/deep/.btn-prev {
-    border: 0px;
-    height: 28px;
 }
 </style>
