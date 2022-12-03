@@ -1,0 +1,29 @@
+.com-table {
+    height: 100%;
+    width: 100%;
+    &-title {
+     color: #FFF;
+     background: #42A2F5;
+     padding: 0;
+     font-size: 15px;
+     height: 40px;
+     line-height: 40px;
+     text-indent: 8px;
+    }
+    &-content {
+     width: 100%;
+     height: calc(100% - 40px - 55px);
+    }
+    &-content-nottitle {
+     width: 100%;
+     height: calc(100% - 55px);
+    }
+    &-page {
+     height: 55px;
+     width: 100%;
+     background: #EFF3F8;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+    }
+   }
