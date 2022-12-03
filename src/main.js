@@ -3,10 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router/index.js'
-import { Table, TableColumn, Pagination } from 'element-ui'
-Vue.use(Table)
-Vue.use(TableColumn)
-Vue.use(Pagination)
+
+import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui';
+
+Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 
@@ -14,6 +15,5 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
+  render: h => h(App)
 })
