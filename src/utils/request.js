@@ -3,7 +3,7 @@ import axios from 'axios'
 
 var instance = axios.create({});
 
-instance.defaults.baseURL = ""
+instance.defaults.baseURL = "http://127.0.0.1:5000/"
 
 //随便抄的等以后再适配
 instance.interceptors.response.use(

@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PictureManager from '@/components/PictureManager'
+import PictureDetail from '@/components/PictureDetail'
+
 // import ImageView from '@/views/ImageView'
 
 const routes = [
@@ -8,6 +10,11 @@ const routes = [
     name: 'home',
     component: PictureManager
   },
+  {
+    path: '/PictureDetail',
+    name: 'PictureDetail',
+    component: PictureDetail
+  }
 //   {
 //     path: '/about',
 //     name: 'about',

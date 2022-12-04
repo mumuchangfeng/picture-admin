@@ -6,7 +6,9 @@
       <el-table-column prop="id" label="id"></el-table-column>
       <el-table-column label="路径" width="500">
         <template v-slot="scope">
-            <a href="https://www.baidu.com">{{ scope.row.source_picture_path }}</a>
+          <div>
+            <router-link to="PictureDetail">{{scope.row.source_picture_path}}</router-link>
+          </div>
         </template>
       </el-table-column>
       <el-table-column prop="build_time" label="创建时间"></el-table-column>
@@ -28,8 +30,7 @@
 </template>
 
 <script>
-import {getPictureList, getSourcePathRequest} from '@/utils/PictureRequest.js'
-// import axios from 'axios'
+import {getPictureRequest, getSourcePathRequest} from '@/utils/PictureRequest.js'
 
 export default {
 
@@ -49,16 +50,18 @@ export default {
     }
   },
   methods: {
-    getPicture: async function () {
+    getPicture: function () {
       // 获取图片查询
       let that = this
-      await getPictureList(that.sourcePicturePathId, that.picturePn, that.picturePs).then(data => {
+      getPictureRequest(that.sourcePicturePathId, that.picturePn, that.picturePs).then(data => {
         that.pictures = data
+        for (let item in that.pictures) {
+          that.pictures[item]['preview_abs_path'] = 'http://127.0.0.1:5000/picture' + 'photo?path=' + that.pictures[item]['preview_path'] + that.pictures[item]['preview_name']
+    }
       })
     },
 
     init() {
-      console.log("1234")
       this.getPictures()
     },
 
@@ -84,18 +87,20 @@ export default {
       this.pn = 1
       this.pictures = []
     },
-    getSourcePathList: async function () {
+    getSourcePathList: function () {
       let that = this
-      await getSourcePathRequest(that.sourcePicturePn, that.sourcePicturePs).then(data => {
-          that.sourcePathDict = data.sourcePaths
-          that.sourcePictureTotal = data.total
+      getSourcePathRequest(that.sourcePicturePn, that.sourcePicturePs).then(response => {
+          console.log('######')
+          console.log(response.data)
+          that.sourcePathDict = response.data.data.sourcePaths
+          that.sourcePictureTotal = response.data.data.total
           console.log(that.sourcePathDict)
       })
     }
   },
   mounted() {
-    this.init()
-    // this.getSourcePathList()
+    // this.init()
+    this.getSourcePathList()
   },
   created () {
       // 页面初始化时就获取源文件
