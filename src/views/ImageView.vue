@@ -7,6 +7,7 @@
 </template>
   
 <script>
+import {getImageList} from '@/api/images.js'
     
 
 export default {
@@ -17,10 +18,7 @@ export default {
     }),
     methods: {
         init() {
-            this.$request({
-                method: 'get',
-                url: '/images',
-            }).then(res => {
+            getImageList().then(res => {
                 console.log(res)
                 this.pictures = res.data['images']
             })
