@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PictureManager from '@/components/PictureManager'
-import PictureDetail from '@/components/PictureDetail'
+// import PictureManager from '@/views/PictureManager'
+// import PictureDetail from '@/views/PictureDetail'
 
 // import ImageView from '@/views/ImageView'
 
@@ -8,12 +8,15 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: PictureManager
+    component: () => import('../views/PictureManager.vue')
   },
   {
     path: '/PictureDetail',
     name: 'PictureDetail',
-    component: PictureDetail
+    component: () => import('../views/PictureDetail.vue'),
+    meta: {
+      requireAuth: true
+    }
   }
 //   {
 //     path: '/about',
